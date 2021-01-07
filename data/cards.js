@@ -4,7 +4,9 @@ const filepath = './data/cards.json';
 
 function load() {
     let rawData = fs.readFileSync(filepath);
-    return JSON.parse(rawData);
+    let data = JSON.parse(rawData);
+    data = data ? data : [];
+    return data;
 }
 
 function save(data) {
