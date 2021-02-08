@@ -30,6 +30,26 @@ module.exports = function (app) {
     return res.send({
       status: 200,
       message: 'Card successfully saved!',
+      _id: card.id,
+    });
+  });
+
+  // Update a card's grid; handles cell click
+  app.put('/cards/:id/:cellIdx', async function (req, res) {
+    const cardId = req.params.id;
+    const cellIdx = req.params.cellIdx;
+    const { value } = req.body;
+
+    // Build update field
+    const field = {
+      [`grid.${cellIdx}`]: value,
+    };
+    const data = await Card.updateOne({ _id: cardId }, { $set: field });
+
+    // TODO: Check if the card is successfully updated
+    return res.send({
+      status: 200,
+      message: 'Card successfully updated!',
     });
   });
 
