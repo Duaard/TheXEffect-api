@@ -1,21 +1,26 @@
-const data = require('./data/cards');
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
 const PORT = 3000;
 let app = express();
+
+// Connect to the db
+mongoose.connect('mongodb://localhost/x-effect', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  // Db is connected
+});
 
 app.use(cors());
 app.use(express.json());
 
-app.get('/cards', (req, res) => {
-    res.json(data.load());
-});
-
-app.post('/cards', (req, res) => {
-    data.save(req.body);
-    res.send(req.body);
-});
+require('./src/routes/cards')(app);
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

@@ -1,18 +1,28 @@
 {
-    "name": "api",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "if [[ $NODE_ENV == 'production' ]]; then node server.js; else nodemon server.js; fi"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "cors": "^2.8.5",
-        "express": "^4.17.1",
-        "nodemon": "^2.0.6"
-    }
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Keep track of habits with rules from [/r/theXeffect](https://www.reddit.com/r/theXeffect/)",
+  "main": "server.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.15",
+    "nodemon": "^2.0.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "if [[ $NODE_ENV == 'production' ]]; then node server.js; else nodemon server.js; fi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Duaard/TheXEffect-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Duaard/TheXEffect-api/issues"
+  },
+  "homepage": "https://github.com/Duaard/TheXEffect-api#readme"
 }
