@@ -21,7 +21,11 @@ module.exports = function (app) {
   app.post('/cards', async function (req, res) {
     const cardJson = req.body;
     // TODO: Validate JSON data
-    const card = new Card({ ...cardJson, grid: [...Array(49)] });
+    const card = new Card({
+      ...cardJson,
+      grid: [...Array(49)],
+      startDate: Date.now(),
+    });
     try {
       await card.save();
     } catch {
@@ -30,7 +34,7 @@ module.exports = function (app) {
     return res.send({
       status: 200,
       message: 'Card successfully saved!',
-      _id: card.id,
+      _id: card._id,
     });
   });
 
@@ -46,11 +50,14 @@ module.exports = function (app) {
     };
     const data = await Card.updateOne({ _id: cardId }, { $set: field });
 
-    // TODO: Check if the card is successfully updated
-    return res.send({
-      status: 200,
-      message: 'Card successfully updated!',
-    });
+    try {
+      return res.send({
+        status: 200,
+        message: 'Card successfully updated!',
+      });
+    } catch (err) {
+      console.error('Err:', err);
+    }
   });
 
   // Update a card using id
